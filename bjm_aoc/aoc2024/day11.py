@@ -1,4 +1,5 @@
 from aocd import data, submit
+import functools
 
 
 def part_a(data):
@@ -19,9 +20,19 @@ def part_a(data):
     return len(arr)
 
 
+@functools.cache
+def solve_item(item, iters):
+    if iters == 0:
+        return 1
+    elif item == '0':
+        return solve_item('1', iters - 1)
+    elif len(item) % 2 == 0:
+        middle = int(len(item) / 2)
+        return solve_item(item[:middle], iters - 1) + solve_item(str(int(item[middle:])), iters - 1)
+    return solve_item(str(int(item) * 2024), iters - 1)
+
 def part_b(data):
-    # more code here..
-    return result
+    return sum(solve_item(item, 75) for item in data.split())
 
 
 test_data = """\
@@ -30,14 +41,14 @@ test_data = """\
 
 
 if __name__ == "__main__":
-    assert part_a(test_data) == 55312
-    part_a_ans = part_a(data)
-    print(part_a_ans)
-    input("Submit?")
-    submit(part_a_ans, part='a')  
+    # assert part_a(test_data) == 55312
+    # part_a_ans = part_a(data)
+    # print(part_a_ans)
+    # input("Submit?")
+    # submit(part_a_ans, part='a')  
   
     # assert part_b(test_data) == 1
-    # part_b_ans = part_b(data)
-    # print(part_b_ans)
-    # input("Submit?")
-    # submit(part_b_ans, part='b')
+    part_b_ans = part_b(data)
+    print(part_b_ans)
+    input("Submit?")
+    submit(part_b_ans, part='b')
