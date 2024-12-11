@@ -1,4 +1,4 @@
-from aocd import data
+from aocd import data, submit
 
 
 def part_a(data):
@@ -17,7 +17,14 @@ some example test data
 
 
 if __name__ == "__main__":
-    assert part_a(test_data) == "expected test result a"
-    assert part_b(test_data) == "expected test result b"
-    print(part_a(data))
-    print(part_b(data))
+    assert part_a(test_data) == 1
+    part_a_ans = part_a(data)
+    print(part_a_ans)
+    input("Submit?")
+    submit(part_a_ans, part='a')  
+  
+    # assert part_b(test_data) == 2
+    # part_b_ans = part_b(data)
+    # print(part_b_ans)
+    # input("Submit?")
+    # submit(part_b_ans, part='b')
