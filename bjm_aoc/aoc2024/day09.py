@@ -24,21 +24,18 @@ def generate_representation(data):
     return arr
 
 
-def find_space_with_length(arr, start_pos, block_len):
-    index = start_pos
+def find_space_with_length(arr, index, block_len):
     while index < len(arr) - block_len:
         if arr[index] != '.':
             index+=1
             continue
-        exist = True
-        existLoc = 0
+        end_location = -1
         for i in range(block_len):
             if arr[index+i] != '.':
-                exist = False
-                existLoc = index+i
+                end_location = index+i
                 break
-        if not exist:
-            index =  existLoc
+        if end_location != -1:
+            index = end_location
         else:
             return index
     return -1
@@ -79,6 +76,7 @@ def part_b(data):
                 break
         
         space_start_pos = find_space_with_length(arr, 0, block_length)
+        # checking this here is not efficient
         if space_start_pos > index - block_length:
             index = index - block_length
             continue
