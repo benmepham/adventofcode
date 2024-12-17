@@ -1,5 +1,5 @@
 from aocd import data, submit
-
+from argparse import ArgumentParser
 
 def part_a(data):
     # your code here..
@@ -17,14 +17,26 @@ some example test data
 
 
 if __name__ == "__main__":
-    assert part_a(test_data) == 1
-    part_a_ans = part_a(data)
-    print(part_a_ans)
-    input("Submit?")
-    submit(part_a_ans, part='a')  
-  
-    # assert part_b(test_data) == 2
-    # part_b_ans = part_b(data)
-    # print(part_b_ans)
-    # input("Submit?")
-    # submit(part_b_ans, part='b')
+    parser = ArgumentParser()
+    parser.add_argument('part', choices=['1', '2'])
+    args = parser.parse_args()
+
+    if args.part == '1':
+        ans = part_a(test_data)
+        print('test_data ans:', ans)
+        assert ans == 1
+        ans = part_a(data)
+        print('ans:', ans)
+        resp = input("Submit? (y/ENTER)")
+        if resp == 'y':
+            submit(ans, part='a')
+
+    elif args.part == '2':  
+        ans = part_b(test_data)
+        print('test_data ans:', ans)
+        assert ans == 1
+        ans = part_b(data)
+        print('ans:', ans)
+        resp = input("Submit? (y/ENTER)")
+        if resp == 'y':
+            submit(ans, part='b')
