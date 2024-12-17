@@ -23,9 +23,31 @@ def part_a(data):
     return ans
 
 
+# todo: this takes multiple minutes, look at a recursive solution
 def part_b(data):
-    # more code here..
-    return result
+    data = data.splitlines()
+    total = [int(x.split(':')[0]) for x in data]
+    num_groups = [x.split(' ')[1:] for x in data]
+    ans = 0
+    for i, nums in enumerate(num_groups):
+        op_groups = list(product(['*', '+', '|'], repeat=len(nums)-1))
+        for ops in op_groups:
+            ops = list(ops)
+            ops.append(' ')
+            new = [x for z in zip(nums, ops) for x in z]
+            new.pop()
+            result = new.pop(0)
+            while len(new) != 0:
+                op = new.pop(0)
+                next = new.pop(0)
+                if op == '|':
+                    result = int(str(result) + str(next))
+                else:   
+                    result = eval(f"{result} {op} {next}")
+            if result == total[i]:
+                ans+=result
+                break
+    return ans
 
 
 test_data = """\
@@ -42,14 +64,14 @@ test_data = """\
 
 
 if __name__ == "__main__":
-    assert part_a(test_data) == 3749
-    part_a_ans = part_a(data)
-    print(part_a_ans)
-    input("Submit?")
-    submit(part_a_ans, part='a')  
-  
-    # assert part_b(test_data) == 2
-    # part_b_ans = part_b(data)
-    # print(part_b_ans)
+    # assert part_a(test_data) == 3749
+    # part_a_ans = part_a(data)
+    # print(part_a_ans)
     # input("Submit?")
-    # submit(part_b_ans, part='b')
+    # submit(part_a_ans, part='a')  
+  
+    assert part_b(test_data) == 11387
+    part_b_ans = part_b(data)
+    print(part_b_ans)
+    input("Submit?")
+    submit(part_b_ans, part='b')
