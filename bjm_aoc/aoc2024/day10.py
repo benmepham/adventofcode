@@ -19,7 +19,7 @@ def find_neighbour(cur, value, grid):
     return neighbours
 
 
-def find_path(loc, value, grid):
+def find_path(loc, value, grid, ignore_visited):
     score = 0
     visited = set()
     queue = []
@@ -27,7 +27,7 @@ def find_path(loc, value, grid):
     while queue:
         cur = queue.pop()
         rep = ','.join(str(x) for x in cur)
-        if rep in visited:
+        if rep in visited and not ignore_visited:
             continue
         visited.add(rep)
         value = grid[cur[0]][cur[1]]
@@ -40,7 +40,6 @@ def find_path(loc, value, grid):
 
 def part_a(data):
     grid = [list(row) for row in data.splitlines()]
-    print(grid)
     trail_heads = []
     for pos_row, row in enumerate(grid):
         for pos_col, col in enumerate(row):
@@ -53,8 +52,16 @@ def part_a(data):
 
 
 def part_b(data):
-    # more code here..
-    return result
+    grid = [list(row) for row in data.splitlines()]
+    trail_heads = []
+    for pos_row, row in enumerate(grid):
+        for pos_col, col in enumerate(row):
+            if col == '0':
+                trail_heads.append([pos_row, pos_col])
+    total = 0
+    for trail_head in trail_heads:
+        total += find_path(trail_head, '0', grid, True)
+    return total
 
 
 test_data = """\
@@ -87,7 +94,7 @@ if __name__ == "__main__":
     elif args.part == '2':  
         ans = part_b(test_data)
         print('test_data ans:', ans)
-        assert ans == 1
+        assert ans == 81
         ans = part_b(data)
         print('ans:', ans)
         resp = input("Submit? (y/ENTER)")
