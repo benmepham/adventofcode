@@ -19,10 +19,14 @@ def part_a(data):
         for combo in combos:
             diff = [combo[0][0] - combo[1][0], combo[0][1] - combo[1][1]]
             loc = [combo[0][0] + diff[0], combo[0][1] + diff[1]]
-            if (loc[0] >= 0 and loc[0] < len(grid) and loc[1] >=0 and loc[1] < len(grid[0])):
-                locations.add(','.join(str(x) for x in loc))
+            if (
+                loc[0] >= 0
+                and loc[0] < len(grid)
+                and loc[1] >= 0
+                and loc[1] < len(grid[0])
+            ):
+                locations.add(",".join(str(x) for x in loc))
     return len(locations)
-
 
 
 def part_b(data):
@@ -39,8 +43,13 @@ def part_b(data):
         for combo in combos:
             diff = [combo[0][0] - combo[1][0], combo[0][1] - combo[1][1]]
             loc = [combo[0][0], combo[0][1]]
-            while (loc[0] >= 0 and loc[0] < len(grid) and loc[1] >=0 and loc[1] < len(grid[0])):
-                locations.add(','.join(str(x) for x in loc))
+            while (
+                loc[0] >= 0
+                and loc[0] < len(grid)
+                and loc[1] >= 0
+                and loc[1] < len(grid[0])
+            ):
+                locations.add(",".join(str(x) for x in loc))
                 loc = [loc[0] + diff[0], loc[1] + diff[1]]
     return len(locations)
 
@@ -63,25 +72,25 @@ test_data = """\
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument('part', choices=['1', '2'])
+    parser.add_argument("part", choices=["1", "2"])
     args = parser.parse_args()
 
-    if args.part == '1':
+    if args.part == "1":
         ans = part_a(test_data)
-        print('test_data ans:', ans)
+        print("test_data ans:", ans)
         assert ans == 14
         ans = part_a(data)
-        print('ans:', ans)
+        print("ans:", ans)
         resp = input("Submit? (y/ENTER)")
-        if resp == 'y':
-            submit(ans, part='a')
+        if resp == "y":
+            submit(ans, part="a")
 
-    elif args.part == '2':  
+    elif args.part == "2":
         ans = part_b(test_data)
-        print('test_data ans:', ans)
+        print("test_data ans:", ans)
         assert ans == 34
         ans = part_b(data)
-        print('ans:', ans)
+        print("ans:", ans)
         resp = input("Submit? (y/ENTER)")
-        if resp == 'y':
-            submit(ans, part='b')
+        if resp == "y":
+            submit(ans, part="b")

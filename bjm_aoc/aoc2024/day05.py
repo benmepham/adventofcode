@@ -2,11 +2,11 @@ from aocd import data, submit
 
 
 def parse_data(data):
-    data = data.split('\n\n')
-    page_groups = [pages.split(',') for pages in data[1].splitlines()]
+    data = data.split("\n\n")
+    page_groups = [pages.split(",") for pages in data[1].splitlines()]
     rules = {}
     for rule in data[0].splitlines():
-        split = rule.split('|')
+        split = rule.split("|")
         if not split[0] in rules:
             rules[split[0]] = []
         rules[split[0]].append(split[1])
@@ -102,10 +102,10 @@ if __name__ == "__main__":
     # part_a_ans = part_a(data)
     # print(part_a_ans)
     # input("Submit?")
-    # submit(part_a_ans, part='a')  
-  
+    # submit(part_a_ans, part='a')
+
     assert part_b(test_data) == 123
     part_b_ans = part_b(data)
     print(part_b_ans)
     input("Submit?")
-    submit(part_b_ans, part='b')
+    submit(part_b_ans, part="b")

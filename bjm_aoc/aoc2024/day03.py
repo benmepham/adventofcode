@@ -6,17 +6,17 @@ def part_a(data):
     result = re.findall(r"mul\((\d+),(\d+)\)", data)
     total = 0
     for operation in result:
-        total += int(operation[0])*int(operation[1])
+        total += int(operation[0]) * int(operation[1])
     return total
 
 
 def part_b(data):
     data += "do()"
-    data = re.sub(r"don't\(\)[\s\S]*?do\(\)", '', data)
+    data = re.sub(r"don't\(\)[\s\S]*?do\(\)", "", data)
     result = re.findall(r"mul\((\d+),(\d+)\)", data)
     total = 0
     for operation in result:
-        total += int(operation[0])*int(operation[1])
+        total += int(operation[0]) * int(operation[1])
     return total
 
 
@@ -35,10 +35,10 @@ if __name__ == "__main__":
     part_a_ans = part_a(data)
     print(part_a_ans)
     input("Submit?")
-    submit(part_a_ans, part='a')  
-  
+    submit(part_a_ans, part="a")
+
     # assert part_b(test_data_b) == 2
     part_b_ans = part_b(data)
     print(part_b_ans)
     input("Submit?")
-    submit(part_b_ans, part='b')
+    submit(part_b_ans, part="b")

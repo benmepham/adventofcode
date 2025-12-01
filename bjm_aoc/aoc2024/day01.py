@@ -17,7 +17,7 @@ def part_a(data):
     arr2.sort()
 
     for a, b in zip(arr1, arr2):
-        total+=abs(a-b)
+        total += abs(a - b)
     return total
 
 
@@ -58,10 +58,10 @@ if __name__ == "__main__":
     part_a_ans = part_a(data)
     print(part_a_ans)
     input("Submit?")
-    submit(part_a_ans, part='a')  
-  
+    submit(part_a_ans, part="a")
+
     # assert part_b(test_data) == 2
     part_b_ans = part_b(data)
     print(part_b_ans)
     input("Submit?")
-    submit(part_b_ans, part='b')
+    submit(part_b_ans, part="b")

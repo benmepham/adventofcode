@@ -2,23 +2,24 @@ from aocd import data, submit
 from itertools import product
 from argparse import ArgumentParser
 
+
 def part_a(data):
     data = data.splitlines()
-    total = [int(x.split(':')[0]) for x in data]
-    num_groups = [x.split(' ')[1:] for x in data]
+    total = [int(x.split(":")[0]) for x in data]
+    num_groups = [x.split(" ")[1:] for x in data]
     ans = 0
     for i, nums in enumerate(num_groups):
-        op_groups = list(product(['*', '+'], repeat=len(nums)-1))
+        op_groups = list(product(["*", "+"], repeat=len(nums) - 1))
         for ops in op_groups:
             ops = list(ops)
-            ops.append(' ')
+            ops.append(" ")
             new = [x for z in zip(nums, ops) for x in z]
             new.pop()
             result = new.pop(0)
             while len(new) != 0:
                 result = eval(f"{result} {new.pop(0)} {new.pop(0)}")
             if result == total[i]:
-                ans+=result
+                ans += result
                 break
     return ans
 
@@ -26,26 +27,26 @@ def part_a(data):
 # todo: this takes multiple minutes, look at a recursive solution
 def part_b(data):
     data = data.splitlines()
-    total = [int(x.split(':')[0]) for x in data]
-    num_groups = [x.split(' ')[1:] for x in data]
+    total = [int(x.split(":")[0]) for x in data]
+    num_groups = [x.split(" ")[1:] for x in data]
     ans = 0
     for i, nums in enumerate(num_groups):
-        op_groups = list(product(['*', '+', '|'], repeat=len(nums)-1))
+        op_groups = list(product(["*", "+", "|"], repeat=len(nums) - 1))
         for ops in op_groups:
             ops = list(ops)
-            ops.append(' ')
+            ops.append(" ")
             new = [x for z in zip(nums, ops) for x in z]
             new.pop()
             result = new.pop(0)
             while len(new) != 0:
                 op = new.pop(0)
                 next = new.pop(0)
-                if op == '|':
+                if op == "|":
                     result = int(str(result) + str(next))
-                else:   
+                else:
                     result = eval(f"{result} {op} {next}")
             if result == total[i]:
-                ans+=result
+                ans += result
                 break
     return ans
 
@@ -64,25 +65,25 @@ test_data = """\
 
 if __name__ == "__main__":
     parser = ArgumentParser()
-    parser.add_argument('part', choices=['1', '2'])
+    parser.add_argument("part", choices=["1", "2"])
     args = parser.parse_args()
 
-    if args.part == '1':
+    if args.part == "1":
         ans = part_a(test_data)
-        print('test_data ans:', ans)
+        print("test_data ans:", ans)
         assert ans == 3749
         ans = part_a(data)
-        print('ans:', ans)
+        print("ans:", ans)
         resp = input("Submit? (y/ENTER)")
-        if resp == 'y':
-            submit(ans, part='a')
+        if resp == "y":
+            submit(ans, part="a")
 
-    elif args.part == '2':  
+    elif args.part == "2":
         ans = part_b(test_data)
-        print('test_data ans:', ans)
+        print("test_data ans:", ans)
         assert ans == 11387
         ans = part_b(data)
-        print('ans:', ans)
+        print("ans:", ans)
         resp = input("Submit? (y/ENTER): ")
-        if resp == 'y':
-            submit(ans, part='b')
+        if resp == "y":
+            submit(ans, part="b")
