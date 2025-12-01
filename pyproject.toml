@@ -1,0 +1,10 @@
+[project]
+name = "adventofcode"
+version ="0.0.1"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "advent-of-code-data>=2.1.0",
+    "black>=25.11.0",
+    "flake8>=7.3.0",
+]
