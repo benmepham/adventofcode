@@ -19,7 +19,9 @@ def part_a(data):
 
 
 def part_b(data):
-    fresh_ranges = list(list(map(int, line.split('-'))) for line in data.split('\n\n')[0].split('\n'))
+    fresh_ranges = list(
+        list(map(int, line.split("-"))) for line in data.split("\n\n")[0].split("\n")
+    )
     total = 0
     last_upper = 0
     print(sorted(fresh_ranges))
